@@ -1,23 +1,12 @@
 import json
 import logging
-import os
 from functools import partial
-from logging import config
-from pathlib import Path
 
 from fastapi import FastAPI
 from starlette import status
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
-from app.main.config.logging import get_logging_dict
-
-root_dir = '%s' % Path(__file__).parent.parent.parent
-
-if not os.path.exists(f'{root_dir}/logs/'):
-    os.mkdir(f'{root_dir}/logs/')
-
-config.dictConfig(get_logging_dict(root_dir))
 logger = logging.getLogger(__name__)
 
 

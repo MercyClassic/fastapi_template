@@ -1,4 +1,3 @@
-import json
 import logging
 from functools import partial
 
@@ -31,7 +30,7 @@ def error_handler(
     logger.error(ex, exc_info=True)
     return JSONResponse(
         status_code=status_code,
-        content=json.dumps({'detail': error_info}),
+        content={'detail': error_info},
     )
 
 

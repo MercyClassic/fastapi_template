@@ -4,20 +4,88 @@ version = "0.1.0"
 description = ""
 authors = []
 
-[tool.black]
-line-length = 100
-exclude = '''
-/(
-    migrations
-)/
-'''
+[tool.ruff]
+line-length = 79
+src = ["src"]
+indent-width = 4
+target-version = "py312"
+fix = true
+exclude = [
+    ".git",
+    "migrations",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".tox",
+    ".venv",
+    "__pychache__",
+    "build",
+    "dist",
+    "node_modules",
+    "venv"
+]
 
-[tool.isort]
-atomic = true
-profile = "black"
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "ARG002",
+    "ANN",
+    "D",
+    "EM102",
+    "TRY003",
+    "PLR0913",
+    "RUF001",
+    "G004",
+    "SIM112",
+]
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.format]
+line-ending = "lf"
+quote-style = "single"
+docstring-code-format = true
+skip-magic-trailing-comma = false
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"tests/**.py" = ["S101", "PLR2004"]
+
+[tool.ruff.lint.isort]
+case-sensitive = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"
+
+[tool.mypy]
+files = ["src"]
+strict = true
+python_version = "3.12"
+ignore_missing_imports = true
+install_types = true
+non_interactive = true
+
+disallow_untyped_defs = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+show_error_codes = true
+warn_unused_ignores = false
+
+disallow_incomplete_defs = true
+disallow_untyped_decorators = true
+disallow_any_unimported = false
+
+[tool.pytest.ini_options]
+pythonpath = ". src"
+testpaths = ["tests"]
+asyncio_mode = "auto"
 
 [tool.poetry.dependencies]
-python="3.11.4"
+python="3.12.2"
 pre-commit = "^3.4.0"
 fastapi = "^0.103.1"
 pydantic = "^2.4.2"
@@ -27,18 +95,8 @@ asyncpg = "^0.28.0"
 gunicorn = "^21.2.0"
 uvicorn = "^0.23.2"
 httpx = "^0.25.1"
-
-[tool.poetry.group.dev.dependencies]
-flake8 = "^6.1.0"
-flake8-bugbear = "^23.3.12"
-flake8-builtins = "^2.1.0"
-flake8-cognitive-complexity = "^0.1.0"
-flake8-commas = "^2.1.0"
-flake8-quotes = "^3.3.2"
-flake8-todo = "^0.7"
-flake8-variables-names = "^0.0.5"
-isort = "^5.12.0"
-black="^23.7.0"
-add-trailing-comma="^3.0.1"
+dishka = "^1.0.0"
+ruff = "^0.4.1"
 pytest = "^7.4.3"
 pytest-asyncio = "^0.21.1"
+mypy = "^1.9.0"

@@ -2,7 +2,7 @@ services:
   postgres:
     container_name: postgres
     image: postgres:15-alpine
-    restart: always
+    restart: unless-stopped
     env_file:
       - .env
     healthcheck:
@@ -13,7 +13,7 @@ services:
       start_period: 3s
   app:
     container_name: app
-    restart: always
+    restart: unless-stopped
     build:
       context: ./
     env_file:
@@ -23,10 +23,19 @@ services:
         condition: service_healthy
     ports:
       - "8000:8000"
+    entrypoint: uvicorn app.main.main:app --host 0.0.0.0 --port 8000
+  app-migrate:
+    container_name: app-migrate
+    restart: no
+    build:
+      context: ./
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
     command: >
       bash -c "
         cd /app
         alembic upgrade head
-        cd /app/src
-        uvicorn app.main.main:app --host 0.0.0.0 --port 8000
       "

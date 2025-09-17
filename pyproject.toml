@@ -85,7 +85,7 @@ testpaths = ["tests"]
 asyncio_mode = "auto"
 
 [tool.poetry.dependencies]
-python="3.12.2"
+python="^3.11"
 pre-commit = "^3.4.0"
 fastapi = "^0.103.1"
 pydantic = "^2.4.2"
@@ -96,6 +96,9 @@ gunicorn = "^21.2.0"
 uvicorn = "^0.23.2"
 httpx = "^0.25.1"
 dishka = "^1.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
 ruff = "^0.4.1"
 pytest = "^7.4.3"
 pytest-asyncio = "^0.21.1"

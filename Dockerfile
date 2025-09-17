@@ -1,25 +1,29 @@
-FROM python:3.12.2-slim
+FROM python:3.12-slim-bookworm AS builder
 
-ENV PYTHONDONTWRITEBYTEDECODE 1
-ENV PYTHONUNBUFFERED 1
-
-RUN mkdir /app
-
-COPY ./pyproject.toml /app/pyproject.toml
+COPY pyproject.toml poetry.lock ./
 
 RUN apt update \
-    && pip install poetry \
-    && apt install -y vim \
-    && apt install -y libmagic1 \
-    && useradd -U app \
-    && chown -R app:app /app \
-    && chdir /app \
+    && pip install poetry==1.8.3 \
+    && apt install -y build-essential libmagic1 libmagic-dev \
     && poetry config virtualenvs.create false \
-    && poetry install --only main
+    && poetry install --only main \
+    && rm -rf /var/lib/apt/lists/* /root/.cache
 
-COPY --chown=app:app . /app
+FROM python:3.12-slim-bookworm AS runtime
 
-WORKDIR /app/src
+ENV PYTHONDONTWRITEBYTEDECODE=1
+ENV PYTHONUNBUFFERED=1
+
+RUN useradd -U app \
+    && mkdir -p /app \
+    && chown -R app:app /app
+
+COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
+
+COPY --chown=app:app . /app/
+
+WORKDIR /app/src/
 
 EXPOSE 8000
 

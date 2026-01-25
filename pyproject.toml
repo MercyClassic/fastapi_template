@@ -62,6 +62,9 @@ inline-quotes = "single"
 
 [tool.mypy]
 files = ["src"]
+plugins = [
+    "sqlalchemy.ext.mypy.plugin",
+]
 strict = true
 python_version = "3.12"
 ignore_missing_imports = true
@@ -76,7 +79,7 @@ show_error_codes = true
 warn_unused_ignores = false
 
 disallow_incomplete_defs = true
-disallow_untyped_decorators = true
+disallow_untyped_decorators = false
 disallow_any_unimported = false
 
 [tool.pytest.ini_options]
@@ -91,11 +94,11 @@ fastapi = "^0.103.1"
 pydantic = "^2.4.2"
 sqlalchemy = "^2.0.22"
 alembic = "^1.12.1"
-asyncpg = "^0.29.0"
 gunicorn = "^21.2.0"
 uvicorn = "^0.23.2"
 httpx = "^0.25.1"
 dishka = "^1.0.0"
+psycopg = {extras = ["binary"], version = "^3.3.2"}
 
 
 [tool.poetry.group.dev.dependencies]

@@ -15,9 +15,7 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-database_url = '%s?async_fallback=True' % os.environ['db_uri']
-
-config.set_main_option('sqlalchemy.url', database_url)
+config.set_main_option('sqlalchemy.url', os.environ['db_uri'])
 
 # add your model's MetaData object here
 # for 'autogenerate' support

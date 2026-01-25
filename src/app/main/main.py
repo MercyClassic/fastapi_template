@@ -5,7 +5,7 @@ from dishka.integrations.fastapi import setup_dishka
 from fastapi import FastAPI
 
 from app.main.di.providers.core import CoreProvider
-from app.main.setup_exception_handlers import setup_exception_handlers
+from app.main.exception_handlers import setup_exception_handlers
 from app.presentators.api.root_router import root_router
 
 logging.basicConfig(

@@ -99,13 +99,13 @@ files = [
 
 [[package]]
 name = "dishka"
-version = "1.1.0"
-description = "Minimal DI framework"
+version = "1.7.2"
+description = "Cute DI framework with scopes and agreeable API"
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "dishka-1.1.0-py3-none-any.whl", hash = "sha256:ad4c36e1907049ddbebad2f543623be5039df45dd72c36845f95f64c1c6edb9a"},
-    {file = "dishka-1.1.0.tar.gz", hash = "sha256:ce76e92b05ab72633df2449039f4cc408979d3450a0d5b180e205d73526a9ebc"},
+    {file = "dishka-1.7.2-py3-none-any.whl", hash = "sha256:f6faa6ab321903926b825b3337d77172ee693450279b314434864978d01fbad3"},
+    {file = "dishka-1.7.2.tar.gz", hash = "sha256:47d4cb5162b28c61bf5541860e605ed5eaf5c667122299c7ef657c86fc8d5a49"},
 ]
 
 [[package]]

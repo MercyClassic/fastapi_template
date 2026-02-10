@@ -97,7 +97,7 @@ alembic = "^1.12.1"
 gunicorn = "^21.2.0"
 uvicorn = "^0.23.2"
 httpx = "^0.25.1"
-dishka = "^1.0.0"
+dishka = "^1.7.0"
 psycopg = {extras = ["binary"], version = "^3.3.2"}
 
 
